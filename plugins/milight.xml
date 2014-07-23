@@ -1,0 +1,66 @@
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulemilight" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+	<rule id="rulemilight" scope="public">
+	<tag>out.action=new Object(); </tag>
+
+	<item>Sarah</item>
+
+	<!-- Composez vous même vos scénarios avec vos type de lampes, vos groupe et les délais souhaités si besoin (sinon, 101ms par défaut) -->
+	
+
+        <one-of>
+					
+			<item>allume la lampe<tag>out.action.action="RGB.ALL_ON"</tag></item>
+			<item>allume la lumière<tag>out.action.action="RGB.ALL_ON"</tag></item>
+			<item>allume </item>
+
+			<item>éteins la lampe<tag>out.action.action="RGB.ALL_OFF"</tag></item>
+			<item>éteins la lumière<tag>out.action.action="RGB.ALL_OFF"</tag></item>
+			<item>éteins tout <tag>out.action.action="RGB.ALL_OFF,RGBW.ALL_OFF,WHITE.ALL_OFF";</tag></item>			
+			
+			<item>color le salon <tag>out.action.action="RGB.ALL_ON,RGBW.ZONE_1_ON"</tag></item>
+			<item>change la couleur </item>
+			<item>passe </item>
+                
+        </one-of>
+
+	
+		<!-- Groupes -->
+		<item repeat="0-1" weight="1.2">
+			<one-of>
+				<item>du salon <tag>out.action.action+=",RGB.ALL_ON";</tag></item>
+				<item>du groupe un <tag>out.action.action+=",RGBW.ZONE_1_ON";</tag></item>
+				<item>du groupe deux <tag>out.action.action+=",RGBW.ZONE_2_ON";</tag></item>	
+				<item>du groupe trois <tag>out.action.action+=",RGBW.ZONE_3_ON";</tag></item>
+				<item>du groupe quatre <tag>out.action.action+=",RGBW.ZONE_4_ON";</tag></item>
+				<item>tout <tag>out.action.action+=",RGB.ALL_ON,RGBW.ALL_ON,WHITE.ALL_ON";</tag></item>	
+			</one-of>
+		</item>	
+
+	
+		<!-- Couleurs -->
+		<item  repeat="0-1">
+            <one-of>
+                <item>en blanc<tag>out.action.action+=",RGB.DISCO_MODE_PREVIOUS"</tag></item>         
+                <item>en bleu<tag>out.action.action+=",RGB.SET_COLOR_BLUE"</tag></item>
+                <item>en bleu roi<tag>out.action.action+=",RGB.SET_COLOR_BLEU_ROI"</tag></item>
+				<item>en fuchia<tag>out.action.action+=",RGB.SET_COLOR_FUCHIA"</tag></item>
+                <item>en lila<tag>out.action.action+=",RGB.SET_COLOR_LILA"</tag></item>
+                <item>en lavande<tag>out.action.action+=",RGB.SET_COLOR_LAVANDE"</tag></item>
+				<item>en violet<tag>out.action.action+=",RGB.SET_COLOR_VIOLET"</tag></item>
+				<item>en aqua<tag>out.action.action+=",RGB.SET_COLOR_AQUA"</tag></item>
+				<item>en mente<tag>out.action.action+=",RGB.SET_COLOR_MENTE"</tag></item>
+				<item>en écume de mer<tag>out.action.action+=",RGB.SET_COLOR_SEAFOAM_GREEN"</tag></item>
+				<item>en vert<tag>out.action.action+=",RGB.SET_COLOR_VERT"</tag></item>
+				<item>en citron vert<tag>out.action.action+=",RGB.SET_COLOR_CITRON_VERT"</tag></item>
+				<item>en jaune<tag>out.action.action+=",RGB.SET_COLOR_JAUNE"</tag></item>
+				<item>en jaune orange<tag>out.action.action+=",RGB.SET_COLOR_JAUNE_ORANGE"</tag></item>
+				<item>en orange<tag>out.action.action+=",RGB.SET_COLOR_ORANGE"</tag></item>
+				<item>en rouge<tag>out.action.action+=",RGB.SET_COLOR_ROUGE"</tag></item>
+				<item>en rose<tag>out.action.action+=",RGB.SET_COLOR_ROSE"</tag></item>
+            </one-of>
+        </item>
+		
+			
+	<tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/milight";</tag>
+	</rule>
+</grammar>

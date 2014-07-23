@@ -1,0 +1,10 @@
+{
+	"modules"	: { 
+		"milight"		: {
+			"description"	: "Pilotage d'ampoules WiFi (Hue like).",
+			"version"	: "1.0",
+			"MiLight_ip"		: "[FIXME]",
+			"MiLight_port"	: "[FIXME]"
+    		}
+  	}
+}
