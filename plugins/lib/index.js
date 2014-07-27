@@ -3,7 +3,6 @@ var limitless = require('./limitless').LimitlessLED;
 exports.RGB = require('./rgb');
 exports.RGBW = require('./rgbw');
 exports.WHITE = require('./white');
-//exports.REPEAT = require('./repeat');
 exports.CMD = require('./cmd');
 
 exports.createSocket = function (opts, type, callback) {
