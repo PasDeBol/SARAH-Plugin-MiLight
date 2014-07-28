@@ -1,0 +1,258 @@
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery("#plugin-menu .plugin-nav a").click(function () {
+            jQuery("#plugin-menu .content > div").hide();
+            jQuery("#plugin-menu .plugin-nav ul li").removeClass("active");
+            jQuery(this).parent().addClass("active");
+            jQuery("#" + jQuery(this).data("toggle")).show();
+            return false;
+        });
+    });
+</script>
+<p class="page-header">
+	<span class="lead">Ce module permet de piloter les lampes Mi.Light (HUE Like)</span></br></br>
+</p>
+<!-- JEROME -->
+<div id="plugin-menu" class="row">
+    <!--Navigation-->
+    <div class="stretch col-md-3 well plugin-nav">
+        <ul class="nav nav-pills nav-stacked">
+            <strong>Configuration</strong>
+				<li><a href="#" data-toggle="plugin-configuration1">Configuration du pont wifi </a></li>
+				<li><a href="#" data-toggle="plugin-configuration2">Configuration du plugin.</a></li>
+            <strong>Utilisation</strong>
+				<li><a href="#" data-toggle="plugin-utilisation">Les commandes.</a></li>
+				<li><a href="#" data-toggle="plugin-exemple">Exemples</a></li>
+        </ul>
+    </div>
+	<!--Content-->
+	<div class="col-md-9 well content">
+	<!--Version-->
+		<div class="panel panel-primary" id="plugin-version-xbmc" > 
+			<div class="panel-heading">Versions</div>
+			<div class="panel-body">
+				<ul class="unstyled" >
+					<li><strong> Version 1.0: </strong></br>
+					[X] Prise en charge des RGBW</br>
+					[X] Prise en charge des WHITE</br>
+					[X] Prise en charge des RGB</br>
+					[X] Fontion REPEAT pour créer un cycle de commande</br>
+					</li></br>
+
+					</li></br>
+				</ul>
+			</div>
+		</div>
+
+		<div class="panel panel-primary" id="plugin-configuration1" style="display: none;"> 
+			<div class="panel-heading">Configuration</div>
+			<div class="panel-body">
+				<b>A) Première connexion du pont wifi.</b></br></br>
+				<ul class="unstyled" >
+					<li>		
+						<b>1) Téléchargement et installation de l'application :</b></br>
+						</br>
+						Téléchargez et installez l'application pour téléphones Android ou tablettes.</br>
+						Recherchez sur le "Google Playstore" le terme : "mi-light".</br>
+						Ou</br>
+						Téléchargez et installez l'application pour téléphones Apple ou tablettes.</br>
+						Recherchez sur l' "Appstore" le terme : "mi-light".</br></br>
+					</li>
+					
+					<li>
+						<b>2) Le "pont wifi", premier contact :</b></br>
+						</br>
+						- Branchez le "pont wifi" (câble USB ou alimentation externe) et  attendez 5 à 10 secondes, le voyant "SYS" devrait clignoter en rouge.</br>
+						- Allez dans les "paramètres Wifi" de votre téléphone ou tablette, recherchez le réseau Wifi (SSID) "MiLight" et établissez la connexion.</br>
+						- Démarrez l'application "Mi-light"</br>
+						- Le "pont wifi" devrait être détectée et sélectionnable dans la liste.</br>
+						- Vous devriez avoir la possibilité de renommer le "pont wifi" par le nom de votre choix.</br>
+						- Cliquez maintenant sur le nom de le "pont wifi" dans la liste.</br>
+						- Sélectionnez sur l'écran, en fonction du type d'ampoules (White, RGB ou RGBW) l'interface correspondante :</br></br>
+
+						<u>Pour les lampes RGBW :</u></br>
+						<TABLE BORDER="0" cellpadding="10"><TR>
+						<TD><img src="assets/milight/images/interface_rgbw.jpg" alt="Mi.Light pour lampes RGBW"/></TD>
+						<TD >
+						Pour synchroniser l'ampoule, il suffit tout simplement d'éteindre la lampe, de l'allumer à nouveau et d'appuyer sur le "I" de l'un des boutons marqués 1,2,3 ou 4.</br>
+						Les numéros 1,2,3 ou 4 représentent les "groupes" ou "zones" qui seront utilisés plus tard.</br>
+						En appuyant directement sur les numéros 1,2,3 ou 4, vous pouvez renommer le bouton.</br>
+						Lorsque vous aurez changé la couleur d'une ampoule et que vous souhaitez la remettre en "blanc", il suffit d'appuyer sur le "I" du bouton correspondant à l'ampoule pendant 3 secondes.</br>
+						</TD>
+						</TR></TABLE>
+						</br>
+
+						<u>Pour les lampes RGB :</u></br>
+						<TABLE BORDER="0" cellpadding="10"><TR>
+						<TD><img src="assets/milight/images/interface_rgb.jpg" alt="Mi.Light pour lampes RGB"/></TD>
+						<TD>
+						Pour synchroniser l'ampoule, il suffit tout simplement d'éteindre la lampe, de l'allumer à nouveau et d'appuyer une fois sur le bouton de couleur pourpre (comme indiqué sur l'image).</br>
+						L'ampoule devrait clignoter 3 fois pour indiquer la synchronisation.</br>
+						</TD>
+						</TR></TABLE>
+						</br>
+
+						<u>Pour les ampoules White :</u></br>
+						<TABLE BORDER="0" cellpadding="10"><TR>
+						<TD><img src="assets/milight/images/interface_white.jpg" alt="Mi.Light pour lampes WHITE"/></TD>
+						<TD>
+						Pour synchroniser l'ampoule, il suffit tout simplement d'éteindre la lampe, de l'allumer à nouveau et d'appuyer sur le "I" de l'un des boutons marqués 1,2,3 ou 4.
+						Les numéros 1,2,3 ou 4 représentent les "groupes" ou "zones" qui seront utilisés plus tard.
+						En appuyant directement sur les numéros 1,2,3 ou 4, vous pouvez renommer le bouton.</br>
+						</TD>
+						</TR></TABLE>
+						</br>
+					</li>
+					<li>
+						<b>3) La télécommande :</b></br>
+						</br>
+						Si vous avez acheté une télécommande, elle se synchronise et fonctionne comme l'application "Mi-Light".</br>
+						Réalisez les opérations décrient ci-dessus en fonction du type d'ampoules en votre possession.</br></br>
+					</li>
+					<li>
+						<b>4) Dés association d'une ampoule :</b></br>
+						</br>
+						Pour supprimer une ampoule d'un groupe ou la remettre à « zéro », il suffit simplement d'éteindre la lampe, de l'allumer à nouveau et d'appuyer sur le bouton "I" correspondant au groupe pendant 5 secondes.</br>
+						L'ampoule devrait clignoter 5 fois pour indiquer que l'opération c'est bien déroulée.</br></br>
+					</li>
+
+				</ul>
+				</br>
+				<b>B) Integrez le pont wifi dans votre réseau Wifi.</b></br></br>
+				<ul class="unstyled" >
+					<li>		
+					La première chose à faire est de "récupérer" l'adresse IP par défaut du "pont wifi".</br>
+					</br>
+					En fonction des versions du firmware de celui-ci, l'adresse IP peut varier.</br>
+					Voici celles que l'ont a rencontrés. Si vous en trouvés d'autres, merci de nous les indiquer, nous les ajouterons dans cette documentations.</br>
+					</br>
+					<ul class="unstyled" >
+						<li><b>10.10.100.254 / 255.255.255.0</b></li>
+						<li><b>192.168.1.100 / 255.255.255.0</b></li>
+					</ul>
+					</br>
+					Normalement, le "pont wifi" est serveur DHCP par defaut.</br>
+					</br>
+					Donc pour pouvoir vous y connecter et modifier sa configuration, deux choix s'offrent à vous :</br>
+					</br>
+					- mettre votre PC, Tablette en "client DHCP",</br>
+					- modifier l'adresse IP de votre PC, Tablette pour être dans le même "range" que le "pont wifi".</br>
+					</br>
+					Une fois cette étape réalisée, tapez dans votre Navigateur Internet l'une des URL suivantes :</br>
+					</br>
+					<ul class="unstyled" >
+						<li><b>http://10.10.100.254/home.html</b></li>
+						<li><b>http://192.168.1.100/home.html</b></li>
+					</ul>
+					</br>
+					Selon la version du Firmware, les "login / password" pourront être les suivants :</br>
+					</br>
+					<ul class="unstyled" >
+						<li><b>admin / admin</b></li>
+						<li><b>admin / 000000</b></li>
+					</ul>
+					</br>
+					</br>
+					<u>Les "choses" sérieuses commencent :</u></br>
+					</br>
+					Sélectionnez le type de réseau sur : Sta</br>
+					Renseignez le SSID avec le nom de votre réseau wifi.</br>
+					Choisissez le mode d'encryption correspondant à celui de votre réseau.</br>
+					Si disponible, renseignez "key format" sur "ASCII".</br>
+					Entrez le mot de passe de votre connexion wifi password dans le champ "Encryption Key".</br>
+					Dans "Hostname", renseignez le nom à donner au "pont wifi".</br>
+					</br>
+					Sauvegardez (Apply)</br>
+					</br>
+					</br>
+					Configuration réseau, deux possibilités :</br>
+					</br>
+					<b>En IP fixe :</b></br>
+					</br>
+					<TABLE BORDER="0" cellpadding="10"><TR>
+					<TD valign=top>
+					Décochez <b>"DHCP Enable"</b>,</br>
+					IP Address : une IP de votre réseau (ex : 192.168.1.100)</br>
+					Subnet Mask : 255.255.255.0</br>
+					Gateway Address : l'IP de votre box ou routeur (ex : 192.168.1.254)</br>
+					DNS Address: 8.8.8.8 (serveur de Google ou celui de votre Box)</br>
+					</br>
+					Sauvegardez (Apply)</br>
+					</TD>
+					<TD>
+					<img src="assets/milight/images/wifi_network.png" alt="Exemple de configuration réseau"/>
+					</TD>
+					</TR></TABLE>
+					</br>
+					Dans le menu de gauche, sélectionnez <b>"system"</b> et <b>"Restart System"</b>.</br>
+					Si l'option n'est pas présente, comme sur le mien, débranchez et rebranchez l'alimentation électrique du "pont wifi".</br>
+					</br>
+					</br>
+					<b>En DHCP :</b></br>
+					</br>
+					Cochez <b>"DHCP Enable"</b>,</br>
+					</br>
+					Sauvegardez (Apply)</br>
+					</br>
+					Dans le menu de gauche, sélectionnez <b>"system"</b> et <b>"Restart System"</b>.</br>
+					Si l'option n'est pas présente, comme sur le mien, débranchez et rebranchez l'alimentation éléctrique du "pont wifi".</br>
+					Une fois celui-ci redémarré, allez voir dans votre Box / Routeur, l'adresse IP attribuée à votre "pont wifi".</br>
+					</br></br>
+					<b><u>Note :</u> En cas de probleme ou de non fonctionnement, vous pouvez faire un "Hard Reset" en maintenant 3 secondes le bouton "Reset" (à coté du port USB).</br>
+					Le pont wifi devrait redémarrer en configuration d'usine.</b></br>
+					</br></br>
+					</li>
+
+				</ul>
+				
+			</div>
+		</div>
+
+		<div class="panel panel-primary" id="plugin-configuration2" style="display: none;"> 
+			<div class="panel-heading">Configuration</div>
+			<div class="panel-body">
+				<ul class="unstyled" >
+					<li> Configuration du plugin.<br>
+					</br>
+					Indiquer dans la configuration du plugin les informations suivantes :</br>
+					<ul class="unstyled" >
+						<li><b>l'adresse IP du pont wifi</b></li>
+						<li><b>le port UDP du pont wifi : 8899 ou 50000 (selon les modeles)</b></li>
+					</ul>
+					</br>
+					<img src="assets/milight/images/params_plugin.jpg" alt="Parametrage du plugin"/>
+					</li></br>
+				</ul>
+			</div>
+		</div>
+
+
+		<div class="panel panel-primary" id="plugin-utilisation" style="display: none;"> 
+			<div class="panel-heading">Utilisation</div>
+			<div class="panel-body">
+				<ul class="unstyled" >
+					<li> 
+						Décrire ici le principe de fonctionnement.<br>
+						à faire....
+					</li>
+					<li> <em>en italique,</em> ou en <strong>gras</strong>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="panel panel-primary" id="plugin-exemple" style="display: none;"> 
+			<div class="panel-heading">Exemple</div>
+			<div class="panel-body">
+				<ul class="unstyled" >
+					<li> 
+						à faire....
+					</li>
+					<li> <em>en italique,</em> ou en <strong>gras</strong>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</div>
