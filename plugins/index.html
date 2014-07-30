@@ -9,6 +9,7 @@
         });
     });
 </script>
+
 <p class="page-header">
 	<span class="lead">Ce module permet de piloter les lampes Mi.Light (HUE Like)</span></br></br>
 </p>
@@ -23,6 +24,8 @@
             <strong>Utilisation</strong>
 				<li><a href="#" data-toggle="plugin-utilisation">Les commandes.</a></li>
 				<li><a href="#" data-toggle="plugin-exemple">Exemples</a></li>
+            <strong>Auteurs</strong>
+				<li><a href="#" data-toggle="plugin-auteurs">Auteurs.</a></li>				
         </ul>
     </div>
 	<!--Content-->
@@ -32,14 +35,13 @@
 			<div class="panel-heading">Versions</div>
 			<div class="panel-body">
 				<ul class="unstyled" >
-					<li><strong> Version 1.0: </strong></br>
-					[X] Prise en charge des RGBW</br>
-					[X] Prise en charge des WHITE</br>
-					[X] Prise en charge des RGB</br>
-					[X] Fontion REPEAT pour créer un cycle de commande</br>
+					<li><strong> Version 1.1 : </strong></br>
+					[X] Prise en charge des ampoules RGBW</br>
+					[X] Prise en charge des ampoules WHITE</br>
+					[X] Prise en charge des ampoules RGB</br>
+					[X] Fonction REPEAT pour créer un cycle de commandes</br>
 					</li></br>
 
-					</li></br>
 				</ul>
 			</div>
 		</div>
@@ -62,8 +64,8 @@
 					<li>
 						<b>2) Le "pont wifi", premier contact :</b></br>
 						</br>
-						- Branchez le "pont wifi" (câble USB ou alimentation externe) et  attendez 5 à 10 secondes, le voyant "SYS" devrait clignoter en rouge.</br>
-						- Allez dans les "paramètres Wifi" de votre téléphone ou tablette, recherchez le réseau Wifi (SSID) "MiLight" et établissez la connexion.</br>
+						- Branchez le "pont wifi" (câble USB ou alimentation externe) et  attendez 5 à 10 secondes, le voyant <b>"SYS"</b> devrait clignoter en rouge.</br>
+						- Allez dans les "paramètres Wifi" de votre téléphone ou tablette, recherchez le réseau Wifi (SSID) <b>"MiLight"</b> et établissez la connexion.</br>
 						- Démarrez l'application "Mi-light"</br>
 						- Le "pont wifi" devrait être détectée et sélectionnable dans la liste.</br>
 						- Vous devriez avoir la possibilité de renommer le "pont wifi" par le nom de votre choix.</br>
@@ -230,29 +232,123 @@
 		<div class="panel panel-primary" id="plugin-utilisation" style="display: none;"> 
 			<div class="panel-heading">Utilisation</div>
 			<div class="panel-body">
+				Le plugin Mi-Light permet de "piloter" simplement les trois types d'ampoules actuellement disponibles : <b>White, RGB et RGBW</b>.</br>
+				</br>
+				Il vous sera possible de :</br>
+				</br>
 				<ul class="unstyled" >
-					<li> 
-						Décrire ici le principe de fonctionnement.<br>
-						à faire....
-					</li>
-					<li> <em>en italique,</em> ou en <strong>gras</strong>
-					</li>
+					<li><b>allumer / éteindre,</b></li>
+					<li><b>changer la couleur parmi 255 teintes possibles (ou pas ! pour l'ampoule White),</b></li>
+					<li><b>changer la luminosité,</b></li>
+					<li><b>créer des groupes de lampes (4 groupes possibles par pont wifi),</b></li>
+					<li><b>créer vos propre "scripts" en mixant les différentes commandes en les séparant par une virgule ","</b></li>
 				</ul>
+				</br>
+				Exemple pour une ampoule RGBW :</br>
+				<b>
+				...</br>
+				< item >Sarah< /item ></br>
+				< item >colore le salon en rouge < tag >out.action.action="RGBW.ZONE_1_ON,RGBW.SET_COLOR_RED"< /tag >< /item ></br>
+				...</b></br>
+				</br>
+				et pour une ampoule RGB :</br>
+				<b>
+				...</br>
+				< item >Sarah< /item ></br>
+				< item >colore le salon en rouge < tag >out.action.action="RGB.ALL_ON,RGB.SET_COLOR_RED"< /tag >< /item ></br>
+				...</b></br>
+				</br>
+				</br>
+				</br>
+				Une commande supplémentaire <b>"CMD.REPEAT_ON_X / CMD.REPEAT_OFF"</b> permet de réaliser des boucles de commandes, pour des actions plus complexes.</br>
+				La valeur de <b>"X"</b> représente le nombre d'itération de la boucle.</br>
+				Les commandes comprises entre les "balises" "REPEAT_ON_X / REPEAT_OFF" sont répétées X fois.</br>
+				</br>
+				Exemple :</br>
+				<b>
+				...</br>
+				< item >Sarah< /item ></br>
+				< item ></br>fait clignoter le salon en rouge 5 fois < tag> out.action.action="RGBW.ZONE_1_ON,CMD.REPEAT_ON_5,RGBW.SET_COLOR_RED,RGBW.SET_COLOR_189,CMD.REPEAT_OFF"< /tag ></br>< /item ></br>
+				...</b></br>
+				</br>
+				Les commandes disponibles pour chaque type d'ampoule sont consultables dans les fichiers suivants :</br>
+				</br>
+				<ul class="unstyled" >
+					<li><b>ampoule WHITE : "./lib/white.js"</b></li>
+					<li><b>ampoule RGB : "./lib/rgb.js"</b></li>
+					<li><b>ampoule RGBW : "./lib/rgbw.js"</b></li>
+				</ul>
+				</br>
+				</br>
+				<b><u>Note :</u></b></br>
+				</br>
+				Choisissez bien votre / vos type(s) d'ampoule(s).</br>
+				Elles n'ont pas toutes les mêmes possibilités. L'ampoule RGBW semble être le bon compromis.</br>
+				</br>
+				<u>WHITE :</u></br>
+				<ul class="unstyled" >
+					<li><b>couleurs : non</b></li>
+					<li><b>création de groupes/zones : oui</b></li>
+					<li><b>gestion de la luminosité : oui</b></li>
+					<li><b>allumer/éteindre : oui (heureusement ^^ )</b></li>	
+				</ul>
+				</br>
+				<u>RGB :</u></br>
+				<ul class="unstyled" >
+					<li><b>couleurs : oui</b></li>
+					<li><b>création de groupes/zones : non</b></li>
+					<li><b>gestion de la luminosité : oui</b></li>
+					<li><b>allumer/éteindre : oui</b></li>	
+				</ul>
+				</br>
+				<u>RGBW :</u></br>
+				<ul class="unstyled" >
+					<li><b>couleurs : oui</b></li>
+					<li><b>création de groupes/zones : oui</b></li>
+					<li><b>gestion de la luminosité : oui</b></li>
+					<li><b>allumer/éteindre : oui</b></li>	
+				</ul>
+				</br>
+				</br>
 			</div>
 		</div>
 
 		<div class="panel panel-primary" id="plugin-exemple" style="display: none;"> 
-			<div class="panel-heading">Exemple</div>
+			<div class="panel-heading">Exemples</div>
 			<div class="panel-body">
+			</br>
+				Des exemples de configurations (fichier "milight.xml") ont été mis dans le répertoire <b>"exemples"</b>.</br>
+				</br>
 				<ul class="unstyled" >
-					<li> 
-						à faire....
-					</li>
-					<li> <em>en italique,</em> ou en <strong>gras</strong>
-					</li>
-				</ul>
+					<li>ampoule RGB : <b>rgb.milight.xml</b></li>
+					<li>ampoule RGBW : <b>rgbw.milight.xml</b></li>
+					<li>ampoule WHITE : <b>white.milight.xml</b></li>
+				</ul>				
+				</br>
+				Le même "exemple" est repris dans les trois configurations mais en l'adaptant aux possibilités de chaque modèle d'ampoule.</br>
+				</br>
+				Pour utiliser ces "exemples", il suffit de renommer un de ces fichiers en <b>"milight.xml"</b> et de la copier à la "racine" du plugin Milight.</br>
+				</br>
+				Vous pouvez bien sur, au sein d'un même fichier "milight.xml", utiliser plusieurs modèles d'ampoules en même temps.</br>
+				</br></br>
 			</div>
 		</div>
+		
+		<div class="panel panel-primary" id="plugin-auteurs" style="display: none;"> 
+			<div class="panel-heading">Les Auteurs</div>
+			<div class="panel-body">
+			</br>
+				Eh oui, ont étaient plusieurs pour faire "ça" !.</br>
+				</br>
+				<ul class="unstyled" >
+					<li>Codeur fou n°1 : <b>Jérôme VEYRET</b></li>
+					<li>Codeur fou n°2 : <b>Olivier DUPONT</b></li>
+				</ul>				
+				</br>
+				</br>
+			</div>
+		</div>
+		
 
 	</div>
 </div>

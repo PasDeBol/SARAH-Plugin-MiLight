@@ -1,6 +1,6 @@
 exports = module.exports = {
 
-	REPEAT_ON:					"RGB.ALL_ON,RGB.ALL_OFF",
+	REPEAT_ON:					0xFF,
 	REPEAT_OFF:					0xFF
 
 }
