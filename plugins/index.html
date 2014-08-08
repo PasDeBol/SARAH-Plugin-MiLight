@@ -234,54 +234,83 @@
 			<div class="panel-body">
 				Le plugin Mi-Light permet de "piloter" simplement les trois types d'ampoules actuellement disponibles : <b>White, RGB et RGBW</b>.</br>
 				</br>
-				Il vous sera possible de :</br>
+				Il vous sera possible de :
 				</br>
 				<ul class="unstyled" >
-					<li><b>allumer / éteindre,</b></li>
-					<li><b>changer la couleur parmi 255 teintes possibles (ou pas ! pour l'ampoule White),</b></li>
-					<li><b>changer la luminosité,</b></li>
-					<li><b>créer des groupes de lampes (4 groupes possibles par pont wifi),</b></li>
-					<li><b>créer vos propre "scripts" en mixant les différentes commandes en les séparant par une virgule ","</b></li>
-				</ul>
-				</br>
-				Exemple pour une ampoule RGBW :</br>
-				<b>
-				...</br>
-				< item >Sarah< /item ></br>
-				< item >colore le salon en rouge < tag >out.action.action="RGBW.ZONE_1_ON,RGBW.SET_COLOR_RED"< /tag >< /item ></br>
-				...</b></br>
-				</br>
-				et pour une ampoule RGB :</br>
-				<b>
-				...</br>
-				< item >Sarah< /item ></br>
-				< item >colore le salon en rouge < tag >out.action.action="RGB.ALL_ON,RGB.SET_COLOR_RED"< /tag >< /item ></br>
-				...</b></br>
-				</br>
-				</br>
-				</br>
-				Une commande supplémentaire <b>"CMD.REPEAT_ON_X / CMD.REPEAT_OFF"</b> permet de réaliser des boucles de commandes, pour des actions plus complexes.</br>
-				La valeur de <b>"X"</b> représente le nombre d'itération de la boucle.</br>
-				Les commandes comprises entre les "balises" "REPEAT_ON_X / REPEAT_OFF" sont répétées X fois.</br>
-				</br>
-				Exemple :</br>
-				<b>
-				...</br>
-				< item >Sarah< /item ></br>
-				< item ></br>fait clignoter le salon en rouge 5 fois < tag> out.action.action="RGBW.ZONE_1_ON,CMD.REPEAT_ON_5,RGBW.SET_COLOR_RED,RGBW.SET_COLOR_189,CMD.REPEAT_OFF"< /tag ></br>< /item ></br>
-				...</b></br>
-				</br>
-				Les commandes disponibles pour chaque type d'ampoule sont consultables dans les fichiers suivants :</br>
-				</br>
+					<li>allumer / éteindre,</b></li>
+					<li>changer la couleur parmi 255 teintes possibles (ou pas ! pour l'ampoule White),</b></li>
+					<li>changer la luminosité,</b></li>
+					<li>créer des groupes de lampes </br>(par pont wifi: 4 groupes pour les RGBW, 4 groupes pour les WHITE et un unique groupe pour les RGB),</b></li>
+					<li>créer vos propres scénarios en mixant les différentes commandes en les séparant par une virgule ","</b></li>
+				</ul></br>
+				Points important:
+				<ul class="unstyled" >
+				<li>
+					<strong>Dans le XML, la commande, ou la suite de commandes séparées par une virgule (scénario), doit être affectée à la variable <em>out.action.action .</em></strong>
+				</li>
+				<li>
+					<strong>Les commandes s'appliquent au dernier groupe piloté par un Zone_x_ON / Zone_x_OFF / ALL_ON / ALL_OFF</strong>
+				</li>
+				<li>
+					<strong>Dans le XML il est possible d'additionner à elle même la variable <em>out.action.action</em> afin de générer des scénarios complexes.</strong>
+					(out.action.action <strong>+=</strong> ".....")
+				</li>
+				</ul></br></br>
+				
+				<strong>A) Les commandes propres aux types d'ampoule.</strong></br>
+				L'ensemble des commandes disponibles pour chaque type d'ampoule est consultable dans les fichiers suivants :
 				<ul class="unstyled" >
 					<li><b>ampoule WHITE : "./lib/white.js"</b></li>
 					<li><b>ampoule RGB : "./lib/rgb.js"</b></li>
 					<li><b>ampoule RGBW : "./lib/rgbw.js"</b></li>
 				</ul>
-				</br>
-				</br>
-				<b><u>Note :</u></b></br>
-				</br>
+				Dans le XML, Il faut rajouter WHITE. ou RGB. ou RGBW. devant la commande souhaitée</br>
+				Par exemple: 
+				<ul class="unstyled" >
+					<li><b>ampoule WHITE : out.action.action="WHITE.ZONE_1_NIGHT_MODE";</b></li>
+					<li><b>ampoule RGB : out.action.action="RGB.ALL_ON";</b></li>
+					<li><b>ampoule RGBW : out.action.action="RGBW.ZONE_1_WHITE";</b></li>
+				</ul></br></br>
+				
+				<strong>B) Les délais:</strong></br>
+				Mi.Light impose un délai de 100ms entre une commande "ON/OFF" et la commande suivante (pour faire varier la luminosité par exemple.). Le plugin intègre ce temps par défaut
+				mais il est possible d'indiquer un temps different si vous souhaitez allonger ou réduire.</br>
+				Pour cela, insérez la valeur en milliseconde du délai souhaité entre les 2 commandes.</br>
+				<strong>out.action.action="RGBW.ZONE_1_WHITE,10000,RGB.ALL_OFF"; </br>
+				(allumer la zone 1 en blanc puis éteindre les RGB 10 secondes plus tard)</strong></br></br></br></br>
+				
+				<strong>C) Les boucles :</strong></br>
+				Une commande supplémentaire <b>"CMD.REPEAT_ON_X / CMD.REPEAT_OFF"</b> permet de réaliser des boucles de commandes, pour des actions plus complexes.</br>
+				La valeur de <b>"X"</b> représente le nombre d'itération de la boucle.</br>
+				Les commandes comprises entre les "balises" "REPEAT_ON_X / REPEAT_OFF" sont répétées X fois.</br>
+				<strong>out.action.action="RGBW.ZONE_1_ON, CMD.REPEAT_ON_5, RGBW.SET_COLOR_RED, RGBW.SET_COLOR_189, CMD.REPEAT_OFF, RGBW.ZONE_1_OFF"</br>
+				(fait clignoter en rouge 5 fois)</strong></br></br>
+				</b></br>
+				
+				<strong>D) Exemples de XML:</strong></br>
+				<ul>
+				<li>
+					...</br>
+					< item >Sarah< /item ></br>
+					< item ></br>fait clignoter le salon en rouge 5 fois < tag> out.action.action="RGBW.ZONE_1_ON, CMD.REPEAT_ON_5, RGBW.SET_COLOR_RED, RGBW.SET_COLOR_189, CMD.REPEAT_OFF, RGBW.ZONE_1_OFF"< /tag ></br>< /item ></br>
+					...
+				</li>
+				<li>
+					...</br>
+					< item >Sarah< /item ></br>
+					< item >monte la luminosité du salon < tag >out.action.action="WHITE.ZONE_1_ON,50,WHITE.BRIGHTNESS_UP,50,WHITE.BRIGHTNESS_UP,50,WHITE.BRIGHTNESS_UP"< /tag >< /item ></br>
+					...</br>
+				</li>
+				<li>
+					...</br>
+					< item >Sarah< /item ></br>
+					< item >colore le salon en rouge < tag >out.action.action="RGB.ALL_ON,RGB.SET_COLOR_RED"< /tag >< /item ></br>
+					...
+				</li>
+				</ul>
+				</br></br>
+				
+				<strong>E) Note :</strong></br>
 				Choisissez bien votre / vos type(s) d'ampoule(s).</br>
 				Elles n'ont pas toutes les mêmes possibilités. L'ampoule RGBW semble être le bon compromis.</br>
 				</br>
